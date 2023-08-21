@@ -1,0 +1,23 @@
+import { fireEvent, render, screen } from "@testing-library/react";
+import {{ componentName }} from ".";
+
+describe("{{ componentName }}", () => {
+  test("renders {{ componentName }}", () => {
+    render(<{{ componentName }}>click me</{{ componentName }}>);
+    const linkElement = screen.getByText(/click me/i);
+    expect(linkElement).toBeInTheDocument();
+  });
+
+  test("renders normal {{ componentName }}", () => {
+    const { container } = render(<{{ componentName }}>click me</{{ componentName }}>);
+    expect(container.querySelector(".ant-btn-normal")).toBeInTheDocument();
+  });
+
+  test("should support click", () => {
+    const onClick = jest.fn();
+    render(<{{ componentName }} onClick={onClick}>click me</{{ componentName }}>);
+    const linkElement = screen.getByText(/click me/i);
+    fireEvent.click(linkElement);
+    expect(onClick).toBeCalled();
+  });
+});
