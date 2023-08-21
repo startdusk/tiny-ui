@@ -5,7 +5,8 @@ import "./index.scss";
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {
   className?: string;
-  type?: "fixed" | "copy";
+  style?: CSSProperties;
+  type?: "fixed" | "copy" | "close";
   size?: number;
 }
 
@@ -54,6 +55,20 @@ const svgMap = {
       ></path>
     </svg>
   ),
+  close: (
+    <svg
+      viewBox="0 0 1024 1024"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      p-id="1410"
+    >
+      <path
+        d="M507.168 473.232L716.48 263.936a16 16 0 0 1 22.624 0l11.312 11.312a16 16 0 0 1 0 22.624L541.12 507.168 750.4 716.48a16 16 0 0 1 0 22.624l-11.312 11.312a16 16 0 0 1-22.624 0L507.168 541.12 297.872 750.4a16 16 0 0 1-22.624 0l-11.312-11.312a16 16 0 0 1 0-22.624l209.296-209.312-209.296-209.296a16 16 0 0 1 0-22.624l11.312-11.312a16 16 0 0 1 22.624 0l209.296 209.296z"
+        fill="#000000"
+        p-id="1411"
+      ></path>
+    </svg>
+  ),
 };
 
 const Icon = (props: Props) => {
@@ -63,7 +78,7 @@ const Icon = (props: Props) => {
     [className as string]: !!className,
   });
 
-  const style: CSSProperties = {};
+  const style: CSSProperties = { ...props.style };
   if (size) {
     style.width = size;
     style.height = size;
@@ -72,9 +87,9 @@ const Icon = (props: Props) => {
   if (type in svgMap) {
     const svg = svgMap[type];
     return cloneElement(svg, {
+      ...others,
       className: cls,
       style,
-      ...others,
     });
   }
 

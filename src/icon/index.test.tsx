@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import Icon from "./index";
+import { fireEvent, render } from "@testing-library/react";
+import Icon from ".";
 
 describe("Icon", () => {
   test("renders Icon", () => {
@@ -15,7 +15,7 @@ describe("Icon", () => {
   test("should support click", () => {
     const onClick = jest.fn();
     const { container } = render(<Icon onClick={onClick} />);
-    const linkElement = container.querySelector("svg") as SVGElement;
+    const linkElement = container.querySelector("svg") as SVGSVGElement;
     fireEvent.click(linkElement);
     expect(onClick).toBeCalled();
   });
