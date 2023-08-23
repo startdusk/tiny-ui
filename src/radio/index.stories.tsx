@@ -18,23 +18,32 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// export const Primary: Story = {
-//   args: {
-//     type: "primary",
-//     children: "Radio",
-//   },
+export const Basic: Story = {
+  args: {
+    children: "Primary Radio",
+    onChange: (e) => console.log(e),
+  },
+};
+// export const Basic: Story = () => {
+//   return (
+//     <>
+//       <Radio onChange={(e) => console.log(e)}>Primary Radio</Radio>
+//     </>
+//   );
 // };
 
-export const Basic = () => {
+export const Unchecked = () => {
   return (
     <>
-      <Radio onChange={(e) => console.log(e)}>Primary Radio</Radio>
+      <Radio checked={false}>Primary Radio</Radio>
     </>
   );
 };
 
-export const Secondary: Story = {
-  args: {
-    children: "Radio",
-  },
+export const Disabled = () => {
+  return (
+    <>
+      <Radio disabled>Primary Radio</Radio>
+    </>
+  );
 };

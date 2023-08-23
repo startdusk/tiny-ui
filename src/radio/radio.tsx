@@ -1,8 +1,9 @@
-import React, {
+import {
   CSSProperties,
   FormEvent,
   HTMLAttributes,
   ReactNode,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -21,19 +22,32 @@ export interface radioProps extends HTMLAttributes<HTMLInputElement> {
 }
 
 const Radio = (props: radioProps) => {
-  const { className, style, onChange, ...others } = props;
+  const { className, style, onChange, disabled, ...others } = props;
   const [checked, setChecked] = useState(false);
   const inputEl = useRef<HTMLInputElement>(null);
   const cls = classnames({
     "ant-radio": true,
     "ant-radio-checked": checked,
+    "ant-radio-disabled": disabled,
   });
   const wrapperCls = classnames({
     "ant-radio-wrapper": true,
+    "ant-radio-wrapper-disabled": disabled,
   });
 
+  useEffect(() => {
+    if ("checked" in props && props.checked !== checked) {
+      setChecked(props.checked!);
+    }
+  }, [props.checked]);
+
   const handleClick = (e: FormEvent<HTMLSpanElement>) => {
-    setChecked(!checked);
+    if (disabled || checked) {
+      return;
+    }
+    if (!("checked" in props)) {
+      setChecked(true);
+    }
 
     if (typeof onChange === "function") {
       e.target = inputEl.current!;

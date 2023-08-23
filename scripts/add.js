@@ -32,6 +32,7 @@ function add() {
 
     const newPath = filePath.replace('scripts/template', `src/${dirName}`)
       .replace('component', dirName)
+      .replace('Component', componentName)
       .replace('.hbs', '')
     await fs.writeFile(newPath, result)
     console.log(chalk.green(`write ${newPath} success`))

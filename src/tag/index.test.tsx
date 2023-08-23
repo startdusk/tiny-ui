@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Tag from ".";
+import Tag from "./Tag";
 
 describe("Tag", () => {
   test("renders Tag", () => {
